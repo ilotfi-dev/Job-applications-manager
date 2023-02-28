@@ -17,7 +17,7 @@ public class SkillController {
         this.skillService = skillService;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public List<Skill> skills(){
         return skillService.showSkills();
     }

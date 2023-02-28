@@ -1,7 +1,6 @@
 package com.example.workproject.entity;
 
-import com.example.workproject.util.UserSkillKey;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.workproject.util.PersonSkillsKey;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -13,32 +12,28 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "test_skill")
-public class UserSkill {
+@Table(name = "person_skill")
+public class PersonSkills {
     @EmbeddedId
-    @JsonIgnore
-    private UserSkillKey id;
+    private PersonSkillsKey id;
     @ManyToOne
-    @MapsId("user_id")
-    @JoinColumn(name = "user_id")
-    private User user;
+    @MapsId("person_id")
+    @JoinColumn(name = "person_id")
+    private Person person;
     @ManyToOne
     @MapsId("skill_id")
     @JoinColumn(name = "skill_id")
     private Skill skill;
-
-    private int rating;
-
+    private int rank;
     private String note;
-
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        UserSkill userSkill = (UserSkill) o;
-        return id != null && Objects.equals(id, userSkill.id);
+        PersonSkills that = (PersonSkills) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

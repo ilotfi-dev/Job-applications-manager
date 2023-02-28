@@ -21,7 +21,8 @@ public class Skill {
     private String skill_name;
     @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<UserSkill> userSkills;
+    @ToString.Exclude
+    private List<PersonSkills> personSkills;
 
     @Override
     public boolean equals(Object o) {

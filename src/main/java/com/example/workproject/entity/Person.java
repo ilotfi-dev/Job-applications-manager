@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,23 +16,26 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name="test")
-public class User {
+@Table(name="person")
+public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
-    private String user_name;
-    private String user_mail;
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private Long person_id;
+    private String person_name;
+    private String person_mail;
+    private Date person_date_of_birth;
+    private Timestamp person_created_at;
+    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<UserSkill> userSkills;
+    @ToString.Exclude
+    private List<PersonSkills> personSkills;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
-        return user_id != null && Objects.equals(user_id, user.user_id);
+        Person person = (Person) o;
+        return person_id != null && Objects.equals(person_id, person.person_id);
     }
 
     @Override

@@ -7,14 +7,15 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+
+@Embeddable
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Embeddable
-public class UserSkillKey implements Serializable {
-    @Column( name = "user_id")
-    private Long user_id;
+public class PersonSkillsKey implements Serializable {
+    @Column(name = "person_id")
+    private Long person_id;
     @Column(name="skill_id")
     private Long skill_id;
 
@@ -22,12 +23,12 @@ public class UserSkillKey implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserSkillKey that = (UserSkillKey) o;
-        return Objects.equals(user_id, that.user_id) && Objects.equals(skill_id, that.skill_id);
+        PersonSkillsKey that = (PersonSkillsKey) o;
+        return person_id.equals(that.person_id) && skill_id.equals(that.skill_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, skill_id);
+        return Objects.hash(person_id, skill_id);
     }
 }
