@@ -1,14 +1,12 @@
 package com.example.workproject.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDate;
+import java.util.*;
 
 
 @Entity
@@ -20,22 +18,31 @@ import java.util.Objects;
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long person_id;
-    private String person_name;
-    private String person_mail;
-    private Date person_date_of_birth;
-    private Timestamp person_created_at;
+    @Column(name = "person_id")
+    private Long personId;
+    @Column(name = "person_name")
+    private String personName;
+    @Column(name = "person_mail")
+    private String personMail;
+
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @Column(name = "person_date_of_birth")
+    private Date personDateOfBirth;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "person_created_at")
+    private Date personCreatedAt;
+
     @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
-    @JsonIgnore
-    @ToString.Exclude
-    private List<PersonSkills> personSkills;
+    private List<PersonSkills> personSkills = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Person person = (Person) o;
-        return person_id != null && Objects.equals(person_id, person.person_id);
+        return personId != null && Objects.equals(personId, person.personId);
     }
 
     @Override

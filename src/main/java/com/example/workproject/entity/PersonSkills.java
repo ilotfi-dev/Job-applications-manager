@@ -1,6 +1,8 @@
 package com.example.workproject.entity;
 
 import com.example.workproject.util.PersonSkillsKey;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -17,14 +19,17 @@ public class PersonSkills {
     @EmbeddedId
     private PersonSkillsKey id;
     @ManyToOne
-    @MapsId("person_id")
+    @MapsId("personId")
     @JoinColumn(name = "person_id")
+    @JsonIgnore
     private Person person;
     @ManyToOne
-    @MapsId("skill_id")
+    @MapsId("skillId")
     @JoinColumn(name = "skill_id")
     private Skill skill;
+
     private int rank;
+
     private String note;
 
 

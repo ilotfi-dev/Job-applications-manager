@@ -15,20 +15,20 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class PersonSkillsKey implements Serializable {
     @Column(name = "person_id")
-    private Long person_id;
+    private Long personId;
     @Column(name="skill_id")
-    private Long skill_id;
+    private Long skillId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PersonSkillsKey that = (PersonSkillsKey) o;
-        return person_id.equals(that.person_id) && skill_id.equals(that.skill_id);
+        return personId.equals(that.personId) && skillId.equals(that.skillId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(person_id, skill_id);
+        return Objects.hash(personId, skillId);
     }
 }
