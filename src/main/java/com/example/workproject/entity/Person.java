@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import java.time.LocalDate;
 import java.util.*;
 
 
@@ -14,7 +13,7 @@ import java.util.*;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name="person")
+@Table(name = "person")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +33,7 @@ public class Person {
     @Column(name = "person_created_at")
     private Date personCreatedAt;
 
-    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<PersonSkills> personSkills = new ArrayList<>();
 
     @Override

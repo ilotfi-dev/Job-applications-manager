@@ -2,9 +2,9 @@ package com.example.workproject.controller;
 
 import com.example.workproject.entity.Skill;
 import com.example.workproject.service.SkillService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +18,28 @@ public class SkillController {
     }
 
     @GetMapping("/")
-    public List<Skill> skills(){
+    public List<Skill> skills() {
         return skillService.showSkills();
+    }
+
+    @GetMapping("/{id}")
+    public Skill skillDetail(@PathVariable Long id) {
+        return skillService.showSkill(id);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Object> addSkill(@RequestBody Skill skill) {
+        return new ResponseEntity<>(skillService.saveSkill(skill), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> removeSkill(@PathVariable Long id) {
+        skillService.deleteSkill(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/change/{id}")
+    public ResponseEntity<Object> changeSkill(@PathVariable Long id, @RequestBody Skill skill) {
+        return new ResponseEntity<>(skillService.changeSkill(id, skill), HttpStatus.OK);
     }
 }

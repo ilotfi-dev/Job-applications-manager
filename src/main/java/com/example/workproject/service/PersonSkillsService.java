@@ -14,7 +14,7 @@ public class PersonSkillsService {
         this.personSkillsRepository = personSkillsRepository;
     }
 
-    public List<PersonSkills> showPersonSkills(){
+    public List<PersonSkills> showPersonSkills() {
         return personSkillsRepository.findAll();
     }
 }

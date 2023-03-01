@@ -15,9 +15,27 @@ public class SkillService {
         this.skillRepository = skillRepository;
     }
 
-    public List<Skill> showSkills(){
+    public Skill saveSkill(Skill skill) {
+        Skill newSkill = new Skill();
+        newSkill.setSkillName(skill.getSkillName());
+        return skillRepository.save(newSkill);
+    }
+
+    public Skill changeSkill(Long id, Skill skill) {
+        Skill updatedSkill = skillRepository.findById(id).orElse(null);
+        updatedSkill.setSkillName(skill.getSkillName());
+        return skillRepository.save(updatedSkill);
+    }
+
+    public List<Skill> showSkills() {
         return skillRepository.findAll();
     }
 
-    public Skill showSkill(Long id){return skillRepository.findSkillBySkillId(id).orElse(null);}
+    public Skill showSkill(Long id) {
+        return skillRepository.findSkillBySkillId(id).orElse(null);
+    }
+
+    public void deleteSkill(Long id) {
+        skillRepository.deleteById(id);
+    }
 }

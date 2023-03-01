@@ -14,8 +14,9 @@ public class PersonSkillsController {
     public PersonSkillsController(PersonSkillsService personSkillsService) {
         this.personSkillsService = personSkillsService;
     }
+
     @GetMapping("/home")
-    public List<PersonSkills> personSkillsList(){
+    public List<PersonSkills> personSkillsList() {
         return personSkillsService.showPersonSkills();
     }
 }
