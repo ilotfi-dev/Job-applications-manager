@@ -1,8 +1,9 @@
 package com.example.workproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -22,6 +23,8 @@ public class Skill {
     @Column(name = "skill_id")
     private Long skillId;
     @Column(name = "skill_name")
+    @NotEmpty(message = "Skill name should not be empty")
+    @Size(min = 1, max = 40, message = "Skill name should be between 1 and 40 characters")
     private String skillName;
     @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL)
     @JsonIgnore

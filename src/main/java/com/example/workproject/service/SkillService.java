@@ -2,6 +2,7 @@ package com.example.workproject.service;
 
 import com.example.workproject.entity.Skill;
 import com.example.workproject.repository.SkillRepository;
+import com.example.workproject.util.exception.SkillNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class SkillService {
     }
 
     public Skill changeSkill(Long id, Skill skill) {
-        Skill updatedSkill = skillRepository.findById(id).orElse(null);
+        Skill updatedSkill = skillRepository.findById(id).orElseThrow(SkillNotFoundException::new);
         updatedSkill.setSkillName(skill.getSkillName());
         return skillRepository.save(updatedSkill);
     }
@@ -32,7 +33,7 @@ public class SkillService {
     }
 
     public Skill showSkill(Long id) {
-        return skillRepository.findSkillBySkillId(id).orElse(null);
+        return skillRepository.findSkillBySkillId(id).orElseThrow(SkillNotFoundException::new);
     }
 
     public void deleteSkill(Long id) {

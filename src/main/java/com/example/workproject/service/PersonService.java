@@ -5,8 +5,8 @@ import com.example.workproject.entity.PersonSkills;
 import com.example.workproject.entity.Skill;
 import com.example.workproject.repository.PersonRepository;
 import com.example.workproject.repository.PersonSkillsRepository;
+import com.example.workproject.util.exception.PersonNotFoundException;
 import com.example.workproject.util.PersonSkillsKey;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,6 @@ public class PersonService {
         this.skillService = skillService;
     }
 
-    @Transactional
     public Person savePerson(Person person) {
         Person newPerson = new Person();
         newPerson.setPersonName(person.getPersonName());
@@ -39,13 +38,13 @@ public class PersonService {
     }
 
     public Person addSkills(Long id, List<PersonSkills> personSkills) {
-        Person updatedPerson = personRepository.findById(id).orElse(null);
+        Person updatedPerson = personRepository.findById(id).orElseThrow(PersonNotFoundException::new);
         updatedPerson.getPersonSkills().addAll(setAllSkills(personSkills, updatedPerson));
         return personRepository.save(updatedPerson);
     }
 
     public List<PersonSkills> showPersonDetail(Long id) {
-        Person person = personRepository.findById(id).orElse(null);
+        Person person = personRepository.findById(id).orElseThrow(PersonNotFoundException::new);
         return personSkillsRepository.findAllByPerson(person);
     }
 

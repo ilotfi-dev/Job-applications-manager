@@ -10,6 +10,5 @@ import java.util.List;
 
 @Repository
 public interface PersonSkillsRepository extends JpaRepository<PersonSkills, PersonSkillsKey> {
-
     List<PersonSkills> findAllByPerson(Person person);
 }

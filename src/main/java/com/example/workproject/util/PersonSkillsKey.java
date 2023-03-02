@@ -16,7 +16,7 @@ import java.util.Objects;
 public class PersonSkillsKey implements Serializable {
     @Column(name = "person_id")
     private Long personId;
-    @Column(name="skill_id")
+    @Column(name = "skill_id")
     private Long skillId;
 
     @Override

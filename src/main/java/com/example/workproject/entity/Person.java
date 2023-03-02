@@ -2,6 +2,9 @@ package com.example.workproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -20,8 +23,12 @@ public class Person {
     @Column(name = "person_id")
     private Long personId;
     @Column(name = "person_name")
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 2, max = 40, message = "Name should be between 2 and 40 characters")
     private String personName;
     @Column(name = "person_mail")
+    @Email(message = "Email should be valid")
+    @NotEmpty(message = "Email should not be empty")
     private String personMail;
 
     @Temporal(TemporalType.DATE)
